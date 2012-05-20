@@ -7,11 +7,13 @@
     <h2>
         Welcome to ASP.NET!
     </h2>
+    <div id="output_pane" runat="server">    
+    </div>
+    <div>
+        <textarea id="repl_console" cols="100" rows="15" runat="server"></textarea>
+        <br />
+        <asp:Button id="run_console" type="submit" Text="Execute" runat="server" OnClick="run_console_Click"/>
+    </div>
     <p>
-        To learn more about ASP.NET visit <a href="http://www.asp.net" title="ASP.NET Website">www.asp.net</a>.
-    </p>
-    <p>
-        You can also find <a href="http://go.microsoft.com/fwlink/?LinkID=152368&amp;clcid=0x409"
-            title="MSDN ASP.NET Docs">documentation on ASP.NET at MSDN</a>.
     </p>
 </asp:Content>
