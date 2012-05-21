@@ -28,7 +28,8 @@
                 dataType: "json",
                 success: function (msg) {
                     console.debug(msg);
-                    $('#output_pane').html(msg.d);
+                    var output = msg.d.replace(/\n/g, '<br/>');
+                    $('#output_pane').html(output);
                 }
             });
         };
