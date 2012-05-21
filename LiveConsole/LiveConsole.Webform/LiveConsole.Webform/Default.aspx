@@ -7,7 +7,7 @@
     <h2>
         Welcome to ASP.NET!
     </h2>
-    <div id="output_pane">    
+    <div id="output_pane" style="height:300px; overflow:scroll;">    
     </div>
     <div>
         <textarea id="repl_console" cols="100" rows="15"></textarea>
@@ -29,7 +29,7 @@
                 success: function (msg) {
                     console.debug(msg);
                     var output = msg.d.replace(/\n/g, '<br/>');
-                    $('#output_pane').html(output);
+                    $('#output_pane').append(output).scrollTop(1e14)
                 }
             });
         };
