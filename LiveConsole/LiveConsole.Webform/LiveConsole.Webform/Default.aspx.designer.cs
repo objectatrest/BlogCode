@@ -11,32 +11,5 @@ namespace LiveConsole.Webform {
     
     
     public partial class _Default {
-        
-        /// <summary>
-        /// output_pane control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl output_pane;
-        
-        /// <summary>
-        /// repl_console control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea repl_console;
-        
-        /// <summary>
-        /// run_console control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button run_console;
     }
 }
