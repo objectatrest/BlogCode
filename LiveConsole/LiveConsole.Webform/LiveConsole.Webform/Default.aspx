@@ -9,8 +9,21 @@
     </h2>
     <div id="output_pane" style="height:300px; overflow:scroll;">    
     </div>
+    <input type="button" id="clear_output" value="Clear output" ></button>
     <div>
-        <textarea id="repl_console" cols="100" rows="15"></textarea>
+        <textarea id="repl_console" cols="100" rows="15">import clr
+clr.AddReference('LiveConsole.Webform')
+print [assembly.GetName().Name for assembly in clr.References]
+from LiveConsole.Webform.ExampleCode import AccountEntry
+from System import DateTime
+
+new_entry = AccountEntry()
+new_entry.Amount = 45
+new_entry.EnteredOn = DateTime.Now
+AccountHelper.AddUserEntry('someone', new_entry)
+
+total = sum([entry.Amount for entry in AccountHelper.GetUserEntries('someone')], 0)
+print total</textarea>
         <br />
         <input type="button" id="run_console" value="Execute"/>
     </div>
@@ -34,8 +47,13 @@
             });
         };
 
+        var clear_output_pane = function () {
+            $('#output_pane').html('');
+        };
+
         $(document).ready(function () {
             $('#run_console').click(function () { execute_script(); });
+            $('#clear_output').click(function () { clear_output_pane(); });
         });
     </script>
 </asp:Content>

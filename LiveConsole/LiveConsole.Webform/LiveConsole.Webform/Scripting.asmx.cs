@@ -31,7 +31,7 @@ namespace LiveConsole.Webform
 
             //setup the engine
             Microsoft.Scripting.Hosting.ScriptEngine engine = IronPython.Hosting.Python.CreateEngine();
-            
+
             //create the stream to write 'print' statements to
             System.IO.MemoryStream stream = new System.IO.MemoryStream();
             System.IO.StreamWriter txtWriter = new System.IO.StreamWriter(stream);
@@ -40,6 +40,9 @@ namespace LiveConsole.Webform
 
             //create the scope and setup any variables needed during runtime
             Microsoft.Scripting.Hosting.ScriptScope scope = engine.CreateScope();
+            
+            scope.SetVariable("AccountHelper", new LiveConsole.Webform.ExampleCode.UserAccountHelper());
+
             Microsoft.Scripting.Hosting.ScriptSource source = engine.CreateScriptSourceFromString(code);
 
             dynamic res = null;
