@@ -15,8 +15,26 @@ printfn "%s" (abbreviate_number_hardcoded -12005000m)
 printfn "%s" (abbreviate_number_hardcoded 32100000000m)
 printfn "%s" (abbreviate_number_hardcoded -32100000000m)
 
+//2a) using partial active patterns
+let (|Thousand|_|) (num:decimal) = if 1000m <= num && num < 1000000m || -1000000m < num && num <= -1000m then Some(num) else None
+let (|Million|_|) (num:decimal) =  if 1000000m <= num && num < 1000000000m || -1000000000m < num && num <= -1000000m then Some(num) else None
+let (|Billion|_|) (num:decimal) =  if 1000000000m <= num && num < 1000000000000m || -1000000000000m < num && num <= -1000000000m then Some(num) else None
+ 
+let format_number_active_pattern (num:decimal) = 
+    match num with
+    | Thousand v -> sprintf "%MK" (num / 1000m)
+    | Million v -> sprintf "%MM" (num / 1000000m)
+    | Billion v  -> sprintf "%MB" (num / 1000000000m)
+    | _ -> sprintf "%M" num    
+ 
+printfn "%s" (format_number_active_pattern 40150m)
+printfn "%s" (format_number_active_pattern -40150m)
+printfn "%s" (format_number_active_pattern 12005000m)
+printfn "%s" (format_number_active_pattern -12005000m)
+printfn "%s" (format_number_active_pattern 32100000000m)
+printfn "%s" (format_number_active_pattern -32100000000m)
 
-//2) separate data and behavior. separate data from algorithm so we can tease out a general algorithm
+//2b) separate data and behavior. separate data from algorithm so we can tease out a general algorithm
 type AbbreviationRange = { Min:decimal; Max:decimal; Abbreviation:string }
 
 let abbreviate_number_behavior (ranges:list<AbbreviationRange>) (num:decimal) = 
@@ -42,5 +60,14 @@ printfn "%s" (abbreviate_number_from_rules -12005000m)
 printfn "%s" (abbreviate_number_from_rules 32100000000m)
 printfn "%s" (abbreviate_number_from_rules -32100000000m)
 
-//extensions:active patterns
+
+//put some nice helper functions out their to make the code readable
+let abbreviate (num:decimal) = 
+    abbreviate_number_from_rules num
+
+let dollars (amount:string) = 
+    sprintf "%s dollars" amount
+
+//the report writer would just need to declaratively format the value
+printfn "%s" (abbreviate 40150m |> dollars)
 ;;
